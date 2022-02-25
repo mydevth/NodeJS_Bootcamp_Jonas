@@ -3,7 +3,7 @@
 - [x] download and install postman
 ---
 * `Install NPM packages`
-   ```
+   ```sh
       npm init
    ```
    ```
