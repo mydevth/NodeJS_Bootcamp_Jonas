@@ -1,6 +1,6 @@
 ## Roadmap
 
-- [x] Download and install postman
+- [x] Download and install [Postman](https://www.postman.com/)
 - [x] Install NPM packages 
    ```sh
       npm init
