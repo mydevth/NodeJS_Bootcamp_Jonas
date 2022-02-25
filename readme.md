@@ -1,8 +1,7 @@
 ## Roadmap
 
-- [x] download and install postman
----
-* `Install NPM packages`
+- [x] Download and install postman
+- [x] Install NPM packages 
    ```sh
       npm init
    ```
