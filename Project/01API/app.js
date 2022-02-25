@@ -7,19 +7,10 @@ const app = express();
 // basic midleware (between request and response)
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//   res.status(200).json({ message: 'Hello from the server side!', app: 'Natours' });
-// });
-
-// app.post('/', (req, res) => {
-//   res.send('You can post to this endpoint....');
-// });
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
-
-// get = read
-app.get('/api/v1/tours', (req, res) => {
+const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
     results: tours.length,
@@ -27,10 +18,10 @@ app.get('/api/v1/tours', (req, res) => {
       tours
     }
   });
-});
+}
 
-// get url parameter
-app.get('/api/v1/tours/:id', (req, res) => {
+
+const getTour =  (req, res) => {
   console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
   const id = req.params.id * 1;
   const tour = tours.find(el => el.id === id);
@@ -49,10 +40,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
       tour            // tours: tour    
     }
   });
-});
+}
 
-// post = create new 
-app.post('/api/v1/tours', (req, res) => {
+const newTour = (req, res) => {
   // console.log(req.body);
 
   const newId = tours[tours.length - 1].id + 1;
@@ -68,10 +58,9 @@ app.post('/api/v1/tours', (req, res) => {
       }
     });
   });
-});
+}
 
-// patch = update data
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
 
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -86,10 +75,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
       tour: '<Updated tour here......>'
     }
   });
-});
+}
 
-// delete data
-app.delete('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
 
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -102,7 +90,18 @@ app.delete('/api/v1/tours/:id', (req, res) => {
     status: 'success',
     data: null
   });
-});
+}
+
+// get = read
+app.get('/api/v1/tours', getAllTours );
+// get url parameter
+app.get('/api/v1/tours/:id', getTour);
+// post = create new 
+app.post('/api/v1/tours', newTour );
+// patch = update data
+app.patch('/api/v1/tours/:id', updateTour );
+// delete data
+app.delete('/api/v1/tours/:id', deleteTour);
 
 
 const port = 3000;
