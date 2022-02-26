@@ -1,23 +1,18 @@
-// app.js
-
 const fs = require('fs');
 const express = require('express');
-const morgan = require('morgan');  //HTTP request logger middleware for node.js
+const morgan = require('morgan');
 
 //   import routes file
-const tourRouter = require('./routes/tourRoutes');    // no need .js
-const userRouter = require('./routes/userRoutes');    // no need .js
+const tourRouter = require('./routes/tourRoutes63');    // no need .js
+const userRouter = require('./routes/userRoutes63');    // no need .js
 
 const app = express();
 
-// 1) MIDDLEWARE (between request and response)
-console.log(process.env.NODE_ENV);
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
+// 1) MIDDLEWARE
+app.use(morgan('dev'));
 
+// basic midleware (between request and response)
 app.use(express.json());
-app.use(express.static(`${__dirname}/public`));  // serving static files
 
 // test create own Middleware for test excute order , default put it before route
 app.use((req, res, next) => {

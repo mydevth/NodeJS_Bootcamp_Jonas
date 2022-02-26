@@ -1,35 +1,46 @@
 const fs = require('fs');
 const express = require('express');
-const res = require('express/lib/response');
+const morgan = require('morgan');
 
 const app = express();
+
+// 1) MIDDLEWARE
+app.use(morgan('dev'));
+
 // basic midleware (between request and response)
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//   res.status(200).json({ message: 'Hello from the server side!', app: 'Natours' });
-// });
+// test create own Middleware for test excute order , default put it before route
+app.use((req, res, next) => {
+  console.log('Hello from the Middleware ❤');
+  next();
+});
 
-// app.post('/', (req, res) => {
-//   res.send('You can post to this endpoint....');
-// });
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  // req.kobTime = new Date().toISOString();     //test var
+  next();
+});
+
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
 
-// get = read
-app.get('/api/v1/tours', (req, res) => {
+// 2) ROUTE HANDERS
+const getAllTours = (req, res) => {
+  console.log(req.requestTime);               //test created Middleware
   res.status(200).json({
+    requestedKobAt: req.requestTime,         //test created Middleware
     status: 'success',
     results: tours.length,
     data: {
-      tours,
+      tours
     }
   });
-});
+}
 
-// get url with parameter (get user by id)
-app.get('/api/v1/tours/:id', (req, res) => {
+
+const getTour = (req, res) => {
   console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
   const id = req.params.id * 1;
   const tour = tours.find(el => el.id === id);
@@ -48,10 +59,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
       tour            // tours: tour    
     }
   });
-});
+}
 
-// post = create new 
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
   // console.log(req.body);
 
   const newId = tours[tours.length - 1].id + 1;
@@ -67,10 +77,9 @@ app.post('/api/v1/tours', (req, res) => {
       }
     });
   });
-});
+}
 
-// patch = update data
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
 
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -85,10 +94,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
       tour: '<Updated tour here......>'
     }
   });
-});
+}
 
-// delete data
-app.delete('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
 
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -101,11 +109,15 @@ app.delete('/api/v1/tours/:id', (req, res) => {
     status: 'success',
     data: null
   });
-});
+}
+
+// 3) ROUTES
+app.route('/api/v1/tours').get(getAllTours).post(createTour);
+app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
 
+// 4) START THE SERVER
 const port = 3000;
-
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
