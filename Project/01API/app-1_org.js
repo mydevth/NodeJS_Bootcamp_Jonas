@@ -23,7 +23,7 @@ app.get('/api/v1/tours', (req, res) => {
     status: 'success',
     results: tours.length,
     data: {
-      tours,
+      tours
     }
   });
 });
