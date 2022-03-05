@@ -8,8 +8,9 @@ const router = express.Router();
 // router.param('id', tourController.checkID);    //   param  (checkID from URL ,call at tourController.js), 
 
 router
-  .route('/top-5-cheap')
-  .get(tourController.aliasTopTours, tourController.getAllTours);
+  .route('/top-5-cheap').get(tourController.aliasTopTours, tourController.getAllTours);
+
+router.route('/monthly-plan/:year').get(tourController.getMonthlyPlan);
 
 router.route('/tour-stats')
   .get(tourController.getTourStats);
