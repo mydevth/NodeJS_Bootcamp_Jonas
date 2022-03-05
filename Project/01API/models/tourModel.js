@@ -60,7 +60,11 @@ const tourSchema = new mongoose.Schema({
     default: Date.now(),
     select: false                // hide createAt
   },
-  startDates: [Date]
+  startDates: [Date],
+  secretTour: {
+    type: Boolean,
+    default: false
+  }
 },                                          // Virtual properties not path of DB, can't query 
   {
     toJSON: { virtuals: true },
@@ -75,7 +79,6 @@ tourSchema.virtual('durationWeek').get(function () {
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
 tourSchema.pre('save', function (next) {
-  // console.log(this);
   this.slug = slugify(this.name, { lower: true });
   next();
 });
@@ -89,6 +92,24 @@ tourSchema.pre('save', function (next) {
 //   console.log(doc);
 //   next();
 // });
+
+// QUERY MIDDLEWARE
+// tourSchema.pre('find', function (next) {
+tourSchema.pre(/^find/, function (next) {       // regular expression , all string start with find
+  this.find({ secretTour: { $ne: true } });   // filter out
+
+  this.start = Date.now();
+  next();
+});
+
+tourSchema.post(/^find/, function (docs, next) {       // regular expression , all string start with find
+  console.log(`Query took ${Date.now() - this.start} milliseconds!`)
+  console.log(docs);
+  next();
+});
+
+
+
 
 const Tour = mongoose.model('Tour', tourSchema);
 
