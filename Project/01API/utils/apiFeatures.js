@@ -31,8 +31,8 @@ class APIFeatures {
 
   limitFields() {
     if (this.queryString.fields) {
-      const fields = this.queryString.fields.split(',').join(' ');
-      this.query = this.query.select('name duration price');
+      const fields = this.queryString.fields.split(',').join(' ');   // join must have space ' '
+      this.query = this.query.select(fields);
     } else {
       this.query = this.query.select('-__v');
     }

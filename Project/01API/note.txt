@@ -53,3 +53,8 @@ npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-confi
  plugin   
      prettierrc
      eslint
+
+//Section 09
+ npm install -g ndb //node debuger
+package.json  -> "script" -> "debug": "ndb server.js"
+ npm run debug
