@@ -19,8 +19,15 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));  // serving static files
 
+// test create own Middleware for test excute order , default put it before route
+app.use((req, res, next) => {
+  console.log('Hello from the Middleware ❤');
+  next();
+});
+
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  // req.kobTime = new Date().toISOString();     //test var
   next();
 });
 
@@ -29,13 +36,6 @@ app.use((req, res, next) => {
 // 3) ROUTES /MOUNT   - SOMEMOVE TO FILE
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
-
-app.all('*', (req, res, next) => {
-  res.status(404).json({
-    status: 'failed',
-    message: `Can't find ${req.originalUrl} on this server!`
-  });
-});
 
 // 4) START THE SERVER
 
