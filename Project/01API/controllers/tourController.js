@@ -128,7 +128,6 @@ exports.deleteTour = async (req, res) => {
   }
 }
 
-
 //---------------------------------------------------------------------
 exports.getTourStats = async (req, res) => {
   try {
