@@ -19,7 +19,7 @@ router.route('/tour-stats')
 
 router
   .route('/')
-  .get(authController.protect, tourController.getAllTours)
+  .get(authController.protect, tourController.getAllTours)   // protect  getAllTours
   .post(tourController.createTour);
 
 
