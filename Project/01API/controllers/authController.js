@@ -37,15 +37,16 @@ exports.signup = catchAsync(async (req, res, next) => {
     role: req.body.role
   });
 
-  const token = signToken(newUser._id);
+  createSendToken(newUser, 201, res);
+  // const token = signToken(newUser._id);
 
-  res.status(201).json({
-    status: 'succes',
-    token,
-    data: {
-      user: newUser
-    }
-  });
+  // res.status(201).json({
+  //   status: 'succes',
+  //   token,
+  //   data: {
+  //     user: newUser
+  //   }
+  // });
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -64,12 +65,13 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok,send token to client
-  const token = signToken(user._id);
+  createSendToken(user, 200, res);
+  // const token = signToken(user._id);
 
-  res.status(200).json({
-    status: 'success',
-    token
-  });
+  // res.status(200).json({
+  //   status: 'success',
+  //   token
+  // });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -181,12 +183,13 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // 3) Update changedPasswordAt property for the user
 
   // 4) Log the user in , send JWT
-  const token = signToken(user._id);
+  createSendToken(user, 200, res);
+  // const token = signToken(user._id);
 
-  res.status(200).json({
-    status: 'success',
-    token
-  });
+  // res.status(200).json({
+  //   status: 'success',
+  //   token
+  // });
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
