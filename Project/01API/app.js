@@ -4,10 +4,11 @@ const express = require('express');
 const morgan = require('morgan');  //HTTP request logger middleware for node.js
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-
-
 
 
 //   import routes file
@@ -35,6 +36,12 @@ app.use('/api', limiter);
 
 // Body parser, reading data brom body into req.body
 app.use(express.json({ limit: '10kb' }));
+
+// Data sanitization againt NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization againt XSS
+app.use(xss());
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));  // serving static files
