@@ -11,7 +11,6 @@ const hpp = require('hpp');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
-
 //   import routes file
 const tourRouter = require('./routes/tourRoutes');    // no need .js
 const userRouter = require('./routes/userRoutes');    // no need .js
