@@ -117,6 +117,10 @@ const tourSchema = new mongoose.Schema({
   }
 );
 
+// tourSchema.index({ price: 1 });   // 1 is accding ,-1 dec
+tourSchema.index({ price: 1, ratingsAverage: -1 });   // 1 is accding ,-1 dec
+tourSchema.index({ slug: 1 });   // 1 is accding ,-1 dec
+
 // create virtual properties use regular function not arrow function 
 tourSchema.virtual('durationWeek').get(function () {
   return this.duration / 7;
