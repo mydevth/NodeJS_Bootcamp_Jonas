@@ -34,6 +34,8 @@ router
 // /tour-within/?distance=233&center=-40,45&unit=mi
 // /tour-within/233/center/-40,50/unit/mi
 
+router.route('/distances/:latlng/unit/:unit').get(tourController.getDistances);
+
 router
   .route('/')
   .get(tourController.getAllTours)   // protect  getAllTours
@@ -52,7 +54,5 @@ router
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
     tourController.deleteTour);
-
-
 
 module.exports = router;    
