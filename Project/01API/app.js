@@ -1,4 +1,5 @@
 // app.js
+const path = require('path');
 const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');  //HTTP request logger middleware for node.js
@@ -18,7 +19,14 @@ const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 // 1) GLOBAL MIDDLEWARE (between request and response)
+
+// Serving static files
+app.use(express.static(path.join(__dirname, 'public')));  // serving static files
+
 // Set Security HTTP Headers
 app.use(helmet());
 
@@ -58,9 +66,6 @@ app.use(
   })
 );
 
-// Serving static files
-app.use(express.static(`${__dirname}/public`));  // serving static files
-
 // Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
@@ -71,6 +76,9 @@ app.use((req, res, next) => {
 // 2) HANDERS  - MOVE TO FILE
 
 // 3) ROUTES /MOUNT   - SOMEMOVE TO FILE
+app.get('/', (req, res) => {
+  res.status(200).render('base');
+});
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
