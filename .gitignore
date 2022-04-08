@@ -2,3 +2,5 @@ node_modules
 package-lock.json
 Course-resource/
 config.env
+bundle.js.map
+bundle.js

@@ -62,3 +62,32 @@ package.json  -> "script" -> "debug": "ndb server.js"
 Error in lesson #187
 --> ERR_BLOCKED_BY_RESPONSE.NotSameOriginAfterDefaultedToSameOriginByCoep 200
 https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065656#questions/16779326
+
+
+# 191   Parcel Bundler
+npm uninstall parcel-bundler
+npm i parcel-bundler@1.12.3 --save-dev
+npm run watch:js
+
+# 191 got Error
+----------------------
+Error on client side Javascript Console - bundle.js:37 Uncaught Error: Cannot find module 'core-js/modules/es6.array.copy-within'
+
+bundle.js:37 Uncaught Error: Cannot find module 'core-js/modules/es6.array.copy-within'
+    at newRequire (bundle.js:37)
+    at localRequire (bundle.js:53)
+    at Object.parcelRequire.index.js (bundle.js:123)
+    at newRequire (bundle.js:47)
+    at bundle.js:81
+    at bundle.js:120
+newRequire @ bundle.js:37
+localRequire @ bundle.js:53
+parcelRequire.index.js @ bundle.js:123
+newRequire @ bundle.js:47
+(anonymous) @ bundle.js:81
+(anonymous) @ bundle.js:120 
+-------------------------------
+How to Fixed
+Run this command
+
+npm i core-js@2.6.5
