@@ -91,3 +91,15 @@ How to Fixed
 Run this command
 
 npm i core-js@2.6.5
+
+
+------------------------------------
+###194  Logout in profile, tour page e
+Avoid jwt malformed
+
+https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15087348#questions/9415183
+  in login.js, in the logout function:
+    replace:
+    location.reload(true)
+    with:
+    location.replace('/')
