@@ -1,11 +1,9 @@
 const fs = require('fs');
 const express = require('express');
-const multer = require('multer');
 
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 
-const upload = multer({ dest: 'public/img/users' });
 
 const router = express.Router();
 
@@ -20,7 +18,7 @@ router.use(authController.protect);  // add this one, because middleware run in 
 
 router.patch('/updateMyPassword', authController.updatePassword);
 router.get('/me', userController.getMe, userController.getUser);
-router.patch('/updateMe', upload.single('photo'), userController.updateMe);
+router.patch('/updateMe', userController.uploadUserPhoto, userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 
 router.use(authController.restrictTo('admin'));
