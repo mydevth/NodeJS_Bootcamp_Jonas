@@ -4,3 +4,4 @@ Course-resource/
 config.env
 bundle.js.map
 bundle.js
+.cache
