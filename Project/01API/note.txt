@@ -108,3 +108,5 @@ https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15087
 
 ###202  npm i sharp
 
+###206  npm i html-to-text
+
