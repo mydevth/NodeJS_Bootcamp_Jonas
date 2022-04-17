@@ -21,8 +21,8 @@ const getAllTours = (req, res) => {
 }
 
 
-const getTour =  (req, res) => {
-  console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
+const getTour = (req, res) => {
+  // console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
   const id = req.params.id * 1;
   const tour = tours.find(el => el.id === id);
 
@@ -93,13 +93,13 @@ const deleteTour = (req, res) => {
 }
 
 // get = read
-app.get('/api/v1/tours', getAllTours );
+app.get('/api/v1/tours', getAllTours);
 // get url parameter
 app.get('/api/v1/tours/:id', getTour);
 // post = create new 
-app.post('/api/v1/tours', newTour );
+app.post('/api/v1/tours', newTour);
 // patch = update data
-app.patch('/api/v1/tours/:id', updateTour );
+app.patch('/api/v1/tours/:id', updateTour);
 // delete data
 app.delete('/api/v1/tours/:id', deleteTour);
 

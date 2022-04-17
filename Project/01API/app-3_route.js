@@ -21,8 +21,8 @@ const getAllTours = (req, res) => {
 }
 
 
-const getTour =  (req, res) => {
-  console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
+const getTour = (req, res) => {
+  // console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
   const id = req.params.id * 1;
   const tour = tours.find(el => el.id === id);
 

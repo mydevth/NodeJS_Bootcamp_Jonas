@@ -30,7 +30,7 @@ app.get('/api/v1/tours', (req, res) => {
 
 // get url with parameter (get user by id)
 app.get('/api/v1/tours/:id', (req, res) => {
-  console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
+  // console.log(req.params);     //  req.params is function read url parameter ,etc= { id: '5' }
   const id = req.params.id * 1;
   const tour = tours.find(el => el.id === id);
 

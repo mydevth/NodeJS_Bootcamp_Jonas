@@ -183,11 +183,11 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
-tourSchema.post(/^find/, function (docs, next) {       // regular expression , all string start with find
-  console.log(`Query took ${Date.now() - this.start} milliseconds!`)
-  console.log(docs);
-  next();
-});
+// tourSchema.post(/^find/, function (docs, next) {       // regular expression , all string start with find
+//   console.log(`Query took ${Date.now() - this.start} milliseconds!`)
+//   console.log(docs);
+//   next();
+// });
 
 // AGGREGATION MIDDLEWARE
 // tourSchema.pre('aggregate', function (next) {
@@ -196,13 +196,9 @@ tourSchema.post(/^find/, function (docs, next) {       // regular expression , a
 //   next();
 // });
 
-
-
-
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
-
 
 // const testTour = new Tour({
 //   name: 'UTMB Tour',

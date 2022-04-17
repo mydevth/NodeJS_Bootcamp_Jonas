@@ -5,7 +5,7 @@ const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-si
 
 // 2) ROUTE HANDERS
 exports.getAllTours = (req, res) => {
-  console.log(req.requestTime);               //test created Middleware
+  // console.log(req.requestTime);               //test created Middleware
   res.status(200).json({
     requestedAt: req.requestTime,         //test created Middleware
     status: 'success',

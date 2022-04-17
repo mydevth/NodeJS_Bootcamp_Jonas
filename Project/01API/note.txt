@@ -113,3 +113,9 @@ https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15087
 ###209 
   sendgrid
 
+stripe
+akkadate@gmail.com
+Tct085329$
+
+### 222 npm i compression
+
